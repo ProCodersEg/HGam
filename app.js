@@ -18,11 +18,11 @@ const userRef = db.collection('users').doc(userId);
 userRef.get().then((doc) => {
     if (doc.exists) {
         const data = doc.data();
-        const userPhoto = document.getElementById('photoUrl');
-        const userName = document.getElementById('name');
+        const userPhoto = document.getElementById('userPhoto');
+        const userName = document.getElementById('userName');
 
         // Set the photo and name in the HTML
-        userPhoto.src = data.photoURL;
+        userPhoto.src = data.photoUrl;
         userName.textContent = data.name;
     } else {
         console.log('No such document!');
