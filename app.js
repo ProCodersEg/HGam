@@ -1,19 +1,29 @@
-// Initialize Firebase with your Firebase project config
-firebase.initializeApp({
-  apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
-  authDomain: "saraha-5e7fd.firebaseapp.com",
-  projectId: "saraha-5e7fd",
-  storageBucket: "saraha-5e7fd.appspot.com",
-  messagingSenderId: "942089850758",
-  appId: "1:942089850758:web:bc767461bc426a904e2607"
-});
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Initialize Firestore
-const db = firebase.firestore();
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
+    authDomain: "saraha-5e7fd.firebaseapp.com",
+    projectId: "saraha-5e7fd",
+    storageBucket: "saraha-5e7fd.appspot.com",
+    messagingSenderId: "942089850758",
+    appId: "1:942089850758:web:bc767461bc426a904e2607",
+    measurementId: "G-SG939BYG2Y"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 
 // Replace 'YOUR_COLLECTION_NAME' with the name of your Firestore collection
 const usersCollection = db.collection('users');
-
 // Function to display user profile information
 function displayUserProfile(userId) {
     usersCollection.doc(userId).get().then((doc) => {
