@@ -18,8 +18,8 @@ const userRef = db.collection('users').doc(userId);
 userRef.get().then((doc) => {
     if (doc.exists) {
         const data = doc.data();
-        const userPhoto = document.getElementById('userPhoto');
-        const userName = document.getElementById('userName');
+        const userPhoto = document.getElementById('photoUrl');
+        const userName = document.getElementById('name');
 
         // Set the photo and name in the HTML
         userPhoto.src = data.photoURL;
