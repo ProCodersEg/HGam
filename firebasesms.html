@@ -40,11 +40,12 @@
   storageBucket: "saraha-5e7fd.appspot.com",
   messagingSenderId: "942089850758",
   appId: "1:942089850758:web:bc767461bc426a904e2607"
+            measurementId: "G-SG939BYG2Y"
         };
 
         firebase.initializeApp(firebaseConfig);
         var firestore = firebase.firestore();
-
+        var analytics = getAnalytics(app);
         // User ID to retrieve data for (e.g., "WXRbWaH3SnNlD7xUEoIy5PhQaIS2")
         var userId = "WXRbWaH3SnNlD7xUEoIy5PhQaIS2"; // Replace with the actual user ID
 
