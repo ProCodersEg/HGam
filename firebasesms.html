@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Send Message</title>
 </head>
 <body>
-    <div>
-        <img id="userPhoto" src="" alt="User Photo">
-        <h1 id="userName">User Name</h1>
-        <input type="text" id="messageInput" placeholder="Type your message">
-        <button id="sendMessageBtn">Send</button>
-    </div>
+    <h1>Send Message</h1>
+    <img id="profilePhoto" src="" alt="Profile Photo">
+    <h2 id="userName"></h2>
+    <input type="text" id="messageInput" placeholder="Enter your message">
+    <button id="sendMessageButton">Send</button>
 
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"></script>
     <script src="app.js"></script>
-    <script src="main.js"></script>
 </body>
 </html>
