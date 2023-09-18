@@ -22,7 +22,7 @@ userRef.get().then((doc) => {
         const userName = document.getElementById('userName');
 
         // Set the photo and name in the HTML
-        userPhoto.src = data.photoUrl;
+        userPhoto.src = "https://lh3.googleusercontent.com/a/ACg8ocIqMkcKENTkgpF38qzsODMFzPt_VOdwFAb1PoJ_jwtXe7g=s96-c";
         userName.textContent = data.name;
     } else {
         console.log('No such document!');
