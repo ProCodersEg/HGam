@@ -34,7 +34,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"></script>
     <script>
         var firebaseConfig = {
-             apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
+            apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
   authDomain: "saraha-5e7fd.firebaseapp.com",
   projectId: "saraha-5e7fd",
   storageBucket: "saraha-5e7fd.appspot.com",
@@ -50,6 +50,25 @@
 
         // Reference to the user's document in the "users" collection
         var userRef = firestore.collection('users').doc(userId);
+
+        // Retrieve user data
+        userRef.get()
+            .then(function(doc) {
+                if (doc.exists) {
+                    var userData = doc.data();
+                    var userName = userData.name;
+                    var photoUrl = userData.photoUrl;
+
+                    // Update the HTML elements with the user's name and photoUrl
+                    document.getElementById("user-name").textContent = userName;
+                    document.getElementById("user-photo").src = photoUrl;
+                } else {
+                    console.log("User data not found.");
+                }
+            })
+            .catch(function(error) {
+                console.error("Error retrieving user data: " + error);
+            });
 
         // Add event listener for the message form submission
         document.getElementById("message-form").addEventListener("submit", function (e) {
@@ -74,25 +93,6 @@
                 console.error("Error adding message: ", error);
             });
         });
-
-        // Retrieve user data
-        userRef.get()
-            .then(function(doc) {
-                if (doc.exists) {
-                    var userData = doc.data();
-                    var userName = userData.name;
-                    var photoUrl = userData.photoUrl;
-
-                    // Update the HTML elements with the user's name and photoUrl
-                    document.getElementById("user-name").textContent = userName;
-                    document.getElementById("user-photo").src = photoUrl;
-                } else {
-                    console.log("User data not found.");
-                }
-            })
-            .catch(function(error) {
-                console.error("Error retrieving user data: " + error);
-            });
     </script>
 </body>
 </html>
