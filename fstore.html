@@ -21,14 +21,36 @@
             margin: 50px auto;
             max-width: 50%;
             min-width: 300px;
+            background-color: #f0f0f0; /* Android-like background color */
         }
 
         .mdc-card {
             margin-top: 20px;
+            background-color: #ffffff; /* Card background color */
+            border-radius: 8px; /* Card border radius */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Card box shadow */
         }
 
         .mdc-text-field {
             width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .mdc-floating-label {
+            color: #2196F3; /* Label color */
+        }
+
+        .mdc-line-ripple::before {
+            background-color: #2196F3; /* Input underline color on focus */
+        }
+
+        .mdc-button {
+            background-color: #2196F3; /* Button background color */
+            color: #fff; /* Button text color */
+        }
+
+        .mdc-button:hover {
+            background-color: #1565c0; /* Button background color on hover */
         }
     </style>
 </head>
