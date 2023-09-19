@@ -71,8 +71,8 @@
 		// var messagesRef = firebase.database()
 		// 	.ref('Collected Data');
 
-		var id = getInputVal('WXRbWaH3SnNlD7xUEoIy5PhQaIS2'); // Get the user ID from the input field
-		var messagesRef = firebase.database().ref('collectedData').child("WXRbWaH3SnNlD7xUEoIy5PhQaIS2");
+		//var id = getInputVal('WXRbWaH3SnNlD7xUEoIy5PhQaIS2'); // Get the user ID from the input field
+		var messagesRef = firebase.database().ref('collectedData');
 
 		document.getElementById('contactForm')
 			.addEventListener('submit', submitForm);
