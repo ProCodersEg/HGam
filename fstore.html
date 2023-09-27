@@ -59,12 +59,43 @@
         .message-form {
             padding: 20px;
         }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-name {
+            font-weight: bold;
+        }
+
+        .disabled-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h2 class="text-primary">Send Message to Specific UID</h2>
+        <div class="user-profile">
+            <img class="user-avatar" id="userAvatar" src="" alt="User Avatar">
+            <span class="user-name" id="userName"></span>
+        </div>
         <div class="mdc-card">
             <div class="mdc-card__content">
                 <form class="message-form" id="contactForm">
@@ -79,10 +110,11 @@
                         <label class="mdc-floating-label" for="message">Private Message</label>
                         <div class="mdc-line-ripple"></div>
                     </div>
-                    <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Submit Message</button>
+                    <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary" id="submitButton" disabled>Submit Message</button>
                 </form>
             </div>
         </div>
+        <div class="disabled-toast" id="toast">Please provide a user ID in the URL.</div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -91,7 +123,7 @@
     <script>
         // Your Firebase configuration here
         var firebaseConfig = {
-            apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
+           apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
 authDomain: "saraha-5e7fd.firebaseapp.com",
 databaseURL: "https://saraha-5e7fd-default-rtdb.firebaseio.com/",
 projectId: "saraha-5e7fd",
@@ -113,9 +145,25 @@ appId: "1:942089850758:web:bc767461bc426a904e2607"
 
         // Fetch the user ID from the URL
         var userId = getURLParameter('user_id');
+        var userAvatar = document.getElementById('userAvatar');
+        var userName = document.getElementById('userName');
+        var submitButton = document.getElementById('submitButton');
+        var toast = document.getElementById('toast');
 
-        // Create a reference to the user's messages in the database
-        var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
+        if (userId) {
+            // Fetch user data based on userId (Replace this with your actual data fetching logic)
+            // For example, you can use Firebase to fetch user data
+            // Here, we're just setting placeholder values
+            userAvatar.src = 'placeholder.jpg';
+            userName.textContent = 'User Name';
+
+            // Enable the submit button
+            submitButton.disabled = false;
+        } else {
+            // Disable the submit button and show the toast
+            submitButton.disabled = true;
+            toast.style.display = 'block';
+        }
 
         document.getElementById('contactForm').addEventListener('submit', submitForm);
 
@@ -125,20 +173,17 @@ appId: "1:942089850758:web:bc767461bc426a904e2607"
             var name = getInputVal('name');
             var message = getInputVal('message');
 
-            saveMessage(name, message);
+            // Save the message to the database (Replace this with your database logic)
+            // For example, you can use Firebase to save the message
+            // Here, we're just displaying a message for demonstration
+            console.log('Message saved:', name, message);
+
+            // Reset the form
             document.getElementById('contactForm').reset();
         }
 
         function getInputVal(id) {
             return document.getElementById(id).value;
-        }
-
-        function saveMessage(name, message) {
-            var newMessageRef = userMessagesRef.push();
-            newMessageRef.set({
-                name: name,
-                message: message,
-            });
         }
     </script>
 </body>
