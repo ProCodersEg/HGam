@@ -2,145 +2,137 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Message User</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Message to Specific User</title>
 
-    <!-- Material-UI CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@10.0.0/dist/material-components-web.min.css">
+<!-- Material-UI CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@10.0.0/dist/material-components-web.min.css">
 
-    <!-- Material-UI Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- Material-UI Icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- Custom CSS -->
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
+<!-- Material-UI JS -->
+<script src="https://cdn.jsdelivr.net/npm/material-components-web@10.0.0/dist/material-components-web.min.js"></script>
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+<!-- Custom CSS -->
+<style>
+body {
+margin: 50px auto;
+max-width: 50%;
+min-width: 300px;
+background-color: #f0f0f0; /* Android-like background color */
+}
 
-        .mdc-card {
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-        }
+.mdc-card {
+margin-top: 20px;
+background-color: #f1f1f1; /* Card background color */
+border-radius: 8px; /* Card border radius */
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Card box shadow */
+}
 
-        .mdc-text-field {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+.mdc-text-field {
+width: 100%;
+margin-bottom: 20px;
+}
 
-        .mdc-floating-label {
-            color: #2196F3;
-        }
+.mdc-floating-label {
+color: #2196F3; /* Label color */
+}
 
-        .mdc-line-ripple::before {
-            background-color: #2196F3;
-        }
+.mdc-line-ripple::before {
+background-color: #2196F3; /* Input underline color on focus */
+}
 
-        .mdc-button {
-            background-color: #2196F3;
-            color: #fff;
-            width: 100%;
-        }
+.mdc-button {
+background-color: #2196F3; /* Button background color */
+color: #fff; /* Button text color */
+}
 
-        .mdc-button:hover {
-            background-color: #000000;
-        }
-
-        .message-form {
-            padding: 20px;
-        }
-    </style>
+.mdc-button:hover {
+background-color: #000000; /* Button background color on hover */
+}
+</style>
 </head>
 
-<body>
-    <div class="container">
-        <h2 class="text-primary">Send Message to Specific UID</h2>
-        <div class="mdc-card">
-            <div class="mdc-card__content">
-                <form class="message-form" id="contactForm">
-                    <div class="mdc-text-field">
-                        <input type="text" class="mdc-text-field__input" id="name">
-                        <label class="mdc-floating-label" for="name">Enter Your Name</label>
-                        <div class="mdc-line-ripple"></div>
-                    </div>
+<body class="container">
+<h2 class="text-primary">Send Message to Specific UID</h2>
 
-                    <div class="mdc-text-field">
-                        <input type="text" class="mdc-text-field__input" id="message">
-                        <label class="mdc-floating-label" for="message">Private Message</label>
-                        <div class="mdc-line-ripple"></div>
-                    </div>
-                    <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Submit Message</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<form class="container" id="contactForm">
+<div class="mdc-card">
+<div class="mdc-card__content">
+<div class="mdc-text-field">
+<input type="text" class="mdc-text-field__input" id="name">
+<label class="mdc-floating-label" for="name">Enter Your Name</label>
+<div class="mdc-line-ripple"></div>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<div class="mdc-text-field">
+<input type="text" class="mdc-text-field__input" id="message">
+<label class="mdc-floating-label" for="message">Private Message</label>
+<div class="mdc-line-ripple"></div>
+</div>
+</div>
+<button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Submit Message</button>
+</div>
+</form>
 
-    <script>
-        // Your Firebase configuration here
-        var firebaseConfig = {
-            apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+
+<script>
+var firebaseConfig = {
+apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
 authDomain: "saraha-5e7fd.firebaseapp.com",
 databaseURL: "https://saraha-5e7fd-default-rtdb.firebaseio.com/",
 projectId: "saraha-5e7fd",
 storageBucket: "saraha-5e7fd.appspot.com",
 messagingSenderId: "942089850758",
 appId: "1:942089850758:web:bc767461bc426a904e2607"
-        };
+};
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-        // Function to get URL parameters
-        function getURLParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
+// Function to get URL parameters
+function getURLParameter(name) {
+name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+var results = regex.exec(location.search);
+return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
 
-        // Fetch the user ID from the URL
-        var userId = getURLParameter('user_id');
+// Fetch the user ID from the URL
+var userId = getURLParameter('user_id');
 
-        // Create a reference to the user's messages in the database
-        var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
+// Create a reference to the user's messages in the database
+var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
 
-        document.getElementById('contactForm').addEventListener('submit', submitForm);
+document.getElementById('contactForm').addEventListener('submit', submitForm);
 
-        function submitForm(e) {
-            e.preventDefault();
+function submitForm(e) {
+e.preventDefault();
 
-            var name = getInputVal('name');
-            var message = getInputVal('message');
+var name = getInputVal('name');
+var message = getInputVal('message');
 
-            saveMessage(name, message);
-            document.getElementById('contactForm').reset();
-        }
+saveMessage(name, message);
+document.getElementById('contactForm').reset();
+}
 
-        function getInputVal(id) {
-            return document.getElementById(id).value;
-        }
+function getInputVal(id) {
+return document.getElementById(id).value;
+}
 
-        function saveMessage(name, message) {
-            var newMessageRef = userMessagesRef.push();
-            newMessageRef.set({
-                name: name,
-                message: message,
-            });
-        }
-    </script>
+function saveMessage(name, message) {
+var newMessageRef = userMessagesRef.push();
+newMessageRef.set({
+name: name,
+message: message,
+});
+}
+</script>
 </body>
 
 </html>
+
