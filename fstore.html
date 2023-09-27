@@ -55,8 +55,10 @@
         }
 
         .mdc-button {
-            background-color: #2196F3; /* Button background color */
-            color: #fff; /* Button text color */
+            width: 100%; /* Button takes up full width */
+background-color: #000; /* Button background color */
+color: #fff; /* Button text color */
+border-radius: 25px; /* Adjust the radius value as needed */
         }
 
         .mdc-button:hover {
@@ -144,8 +146,8 @@ appId: "1:942089850758:web:bc767461bc426a904e2607"
         usersCollection.doc(userId).get().then(function(doc) {
             if (doc.exists) {
                 var userData = doc.data();
-                var userPhoto = document.getElementById('userPhoto');
-                var userName = document.getElementById('userName');
+                var userPhoto = document.getElementById('photoUrl');
+                var userName = document.getElementById('name');
                 
                 // Set user photo and name
                 userPhoto.src = userData.photo; // Replace 'photo' with the actual field name for the photo URL in your Firestore document
