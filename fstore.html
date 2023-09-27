@@ -51,6 +51,7 @@
         }
 
         .mdc-button {
+            width: 100%; /* Button takes up full width */
             background-color: #2196F3; /* Button background color */
             color: #fff; /* Button text color */
         }
@@ -112,6 +113,10 @@ appId: "1:942089850758:web:bc767461bc426a904e2607"
         var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
 
         document.getElementById('contactForm').addEventListener('submit', submitForm);
+
+        if (!userId || !userMessagesRef) {
+        submitButton.disabled = true;
+        }
 
         function submitForm(e) {
             e.preventDefault();
