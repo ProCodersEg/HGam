@@ -116,13 +116,6 @@ var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
 
 document.getElementById('contactForm').addEventListener('submit', submitForm);
   
-  // Check if the userId is valid (not null, undefined, or empty string)
-    if (!userId) {
-        // Disable the submit button if userId is not valid
-        submitButton.disabled = true;
-        alert('Invalid user ID');
-    }
-  
 function submitForm(e) {
 e.preventDefault();
 
@@ -136,6 +129,13 @@ document.getElementById('contactForm').reset();
 function getInputVal(id) {
 return document.getElementById(id).value;
 }
+
+  // Check if the userId is valid (not null, undefined, or empty string)
+    if (!userId) {
+        // Disable the submit button if userId is not valid
+        submitButton.disabled = true;
+        alert('Invalid user ID');
+    }
 
 function saveMessage(name, message) {
 var newMessageRef = userMessagesRef.push();
