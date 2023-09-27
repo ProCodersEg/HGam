@@ -15,10 +15,6 @@
 <!-- Material-UI JS -->
 <script src="https://cdn.jsdelivr.net/npm/material-components-web@10.0.0/dist/material-components-web.min.js"></script>
 
-  <!-- Material-UI Dialog CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/dialog@10.0.0/dist/mdc.dialog.min.css">
-
-
 <!-- Custom CSS -->
 <style>
 body {
@@ -118,53 +114,28 @@ var userId = getURLParameter('user_id');
 // Create a reference to the user's messages in the database
 var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
 
-  // Get a reference to the dialog element
-var dialog = new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'));
-
-
 document.getElementById('contactForm').addEventListener('submit', submitForm);
   
 function submitForm(e) {
-    e.preventDefault();
+e.preventDefault();
 
-    var name = getInputVal('name');
-    var message = getInputVal('message');
+var name = getInputVal('name');
+var message = getInputVal('message');
 
-    // Display the dialog with a message
-    dialog.foundation_.setContent('Please wait for 10 seconds...');
-
-    // Open the dialog
-    dialog.open();
-
-    // Wait for 10 seconds (you can replace this with your actual submission logic)
-    setTimeout(function () {
-        // Simulate successful submission (you can replace this with your actual submission logic)
-        var isSubmissionSuccessful = true;
-
-        if (isSubmissionSuccessful) {
-            // If successful, close the dialog
-            dialog.close();
-
-            // Save the message to the database
-            saveMessage(name, message);
-
-            // Clear the form
-            document.getElementById('contactForm').reset();
-
-            // Reload the webpage
-            location.reload();
-        } else {
-            // If not successful, show an error message
-            dialog.foundation_.setContent('Submission failed. Please try again.');
-
-            // Wait for a few seconds before closing the dialog
-            setTimeout(function () {
-                dialog.close();
-            }, 2000); // Adjust the timeout as needed
-        }
-    }, 10000); // 10 seconds
+saveMessage(name, message);
+document.getElementById('contactForm').reset();
 }
 
+function getInputVal(id) {
+return document.getElementById(id).value;
+}
+
+function saveMessage(name, message) {
+var newMessageRef = userMessagesRef.push();
+newMessageRef.set({
+name: name,
+message: message,
+});
 }
 </script>
 </body>
