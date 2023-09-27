@@ -54,6 +54,8 @@
             width: 100%; /* Button takes up full width */
             background-color: #000000; /* Button background color */
             color: #fff; /* Button text color */
+            border-radius: 25px; /* Adjust the radius value as needed */
+
         }
 
         .mdc-button:hover {
@@ -114,9 +116,11 @@ appId: "1:942089850758:web:bc767461bc426a904e2607"
 
         document.getElementById('contactForm').addEventListener('submit', submitForm);
 
-        if (!userId || !userMessagesRef) {
+         // Check if the userId exists in the URL
+    if (!userId) {
+        // If userId does not exist, disable the submit button
         submitButton.disabled = true;
-        }
+    }
 
         function submitForm(e) {
             e.preventDefault();
