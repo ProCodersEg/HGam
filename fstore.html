@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Message to Specific User</title>
+    <title>Send Message User</title>
 
     <!-- Material-UI CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@10.0.0/dist/material-components-web.min.css">
@@ -79,82 +79,67 @@
                         <label class="mdc-floating-label" for="message">Private Message</label>
                         <div class="mdc-line-ripple"></div>
                     </div>
-                    <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary"
-                        id="submitBtn">Submit Message</button>
+                    <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Submit Message</button>
                 </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Snackbar for toast notification -->
-    <div id="snackbar" class="mdc-snackbar">
-        <div class="mdc-snackbar__surface">
-            <div class="mdc-snackbar__label" role="status" aria-live="polite"></div>
-            <div class="mdc-snackbar__actions">
-                <button type="button" class="mdc-button mdc-snackbar__action" aria-label="Dismiss"></button>
             </div>
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+
     <script>
         // Your Firebase configuration here
-        // ... (Firebase config code) ...
+        var firebaseConfig = {
+            apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
+authDomain: "saraha-5e7fd.firebaseapp.com",
+databaseURL: "https://saraha-5e7fd-default-rtdb.firebaseio.com/",
+projectId: "saraha-5e7fd",
+storageBucket: "saraha-5e7fd.appspot.com",
+messagingSenderId: "942089850758",
+appId: "1:942089850758:web:bc767461bc426a904e2607"
+        };
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Function to get URL parameters
-            function getURLParameter(name) {
-                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-                var results = regex.exec(location.search);
-                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-            }
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
 
-            // Fetch the user ID from the URL
-            var userId = getURLParameter('user_id');
+        // Function to get URL parameters
+        function getURLParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
 
-            // Check if userId is empty, disable submit button and show toast
-            if (!userId) {
-                var submitBtn = document.getElementById('submitBtn');
-                submitBtn.disabled = true;
+        // Fetch the user ID from the URL
+        var userId = getURLParameter('user_id');
 
-                // Show a toast notification
-                var snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
-                var dataObj = {
-                    message: 'User ID is missing in the URL.',
-                    actionText: 'Dismiss'
-                };
-                snackbar.open(dataObj);
-            }
+        // Create a reference to the user's messages in the database
+        var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
 
-            // Create a reference to the user's messages in the database
-            var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
+        document.getElementById('contactForm').addEventListener('submit', submitForm);
 
-            document.getElementById('contactForm').addEventListener('submit', submitForm);
+        function submitForm(e) {
+            e.preventDefault();
 
-            function submitForm(e) {
-                e.preventDefault();
+            var name = getInputVal('name');
+            var message = getInputVal('message');
 
-                var name = getInputVal('name');
-                var message = getInputVal('message');
+            saveMessage(name, message);
+            document.getElementById('contactForm').reset();
+        }
 
-                saveMessage(name, message);
-                document.getElementById('contactForm').reset();
-            }
+        function getInputVal(id) {
+            return document.getElementById(id).value;
+        }
 
-            function getInputVal(id) {
-                return document.getElementById(id).value;
-            }
-
-            function saveMessage(name, message) {
-                var newMessageRef = userMessagesRef.push();
-                newMessageRef.set({
-                    name: name,
-                    message: message,
-                });
-            }
-        });
+        function saveMessage(name, message) {
+            var newMessageRef = userMessagesRef.push();
+            newMessageRef.set({
+                name: name,
+                message: message,
+            });
+        }
     </script>
 </body>
 
