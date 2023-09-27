@@ -66,7 +66,7 @@ background-color: #444444; /* Button background color on hover */
 
 <body>
 <div class="mdc-card">
-<h2 class="text-primary">Send Private Message</h2>
+<h2 class="text-primary">Send Message</h2>
 <form id="contactForm">
 <div class="mdc-text-field">
 <input type="text" class="mdc-text-field__input" id="name">
@@ -115,13 +115,14 @@ var userId = getURLParameter('user_id');
 var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
 
 document.getElementById('contactForm').addEventListener('submit', submitForm);
-
-// Check if the userId exists in the URL
-if (!userId) {
-// If userId does not exist, disable the submit button
-submitButton.disabled = true;
-}
-
+  
+  // Check if the userId is valid (not null, undefined, or empty string)
+    if (!userId) {
+        // Disable the submit button if userId is not valid
+        submitButton.disabled = true;
+        alert('Invalid user ID');
+    }
+  
 function submitForm(e) {
 e.preventDefault();
 
