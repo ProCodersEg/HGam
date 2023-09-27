@@ -12,23 +12,25 @@
     <!-- Material-UI Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- Material-UI JS -->
-    <script src="https://cdn.jsdelivr.net/npm/material-components-web@10.0.0/dist/material-components-web.min.js"></script>
-
     <!-- Custom CSS -->
     <style>
         body {
-            margin: 50px auto;
-            max-width: 50%;
-            min-width: 300px;
-            background-color: #f0f0f0; /* Android-like background color */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         .mdc-card {
             margin-top: 20px;
-            background-color: #f1f1f1; /* Card background color */
-            border-radius: 8px; /* Card border radius */
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Card box shadow */
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         }
 
         .mdc-text-field {
@@ -37,58 +39,65 @@
         }
 
         .mdc-floating-label {
-            color: #2196F3; /* Label color */
+            color: #2196F3;
         }
 
         .mdc-line-ripple::before {
-            background-color: #2196F3; /* Input underline color on focus */
+            background-color: #2196F3;
         }
 
         .mdc-button {
-            background-color: #2196F3; /* Button background color */
-            color: #fff; /* Button text color */
+            background-color: #2196F3;
+            color: #fff;
+            width: 100%;
         }
 
         .mdc-button:hover {
-            background-color: #000000; /* Button background color on hover */
+            background-color: #000000;
+        }
+
+        .message-form {
+            padding: 20px;
         }
     </style>
 </head>
 
-<body class="container">
-    <h2 class="text-primary">Send Message to Specific UID</h2>
-
-    <form class="container" id="contactForm">
+<body>
+    <div class="container">
+        <h2 class="text-primary">Send Message to Specific UID</h2>
         <div class="mdc-card">
             <div class="mdc-card__content">
-                <div class="mdc-text-field">
-                    <input type="text" class="mdc-text-field__input" id="name">
-                    <label class="mdc-floating-label" for="name">Enter Your Name</label>
-                    <div class="mdc-line-ripple"></div>
-                </div>
+                <form class="message-form" id="contactForm">
+                    <div class="mdc-text-field">
+                        <input type="text" class="mdc-text-field__input" id="name">
+                        <label class="mdc-floating-label" for="name">Enter Your Name</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
 
-                <div class="mdc-text-field">
-                    <input type="text" class="mdc-text-field__input" id="message">
-                    <label class="mdc-floating-label" for="message">Private Message</label>
-                    <div class="mdc-line-ripple"></div>
-                </div>
+                    <div class="mdc-text-field">
+                        <input type="text" class="mdc-text-field__input" id="message">
+                        <label class="mdc-floating-label" for="message">Private Message</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                    <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Submit Message</button>
+                </form>
             </div>
-            <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Submit Message</button>
         </div>
-    </form>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 
-     <script>
+    <script>
+        // Your Firebase configuration here
         var firebaseConfig = {
             apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
-    authDomain: "saraha-5e7fd.firebaseapp.com",
-    databaseURL: "https://saraha-5e7fd-default-rtdb.firebaseio.com/",
-    projectId: "saraha-5e7fd",
-    storageBucket: "saraha-5e7fd.appspot.com",
-    messagingSenderId: "942089850758",
-    appId: "1:942089850758:web:bc767461bc426a904e2607"
+authDomain: "saraha-5e7fd.firebaseapp.com",
+databaseURL: "https://saraha-5e7fd-default-rtdb.firebaseio.com/",
+projectId: "saraha-5e7fd",
+storageBucket: "saraha-5e7fd.appspot.com",
+messagingSenderId: "942089850758",
+appId: "1:942089850758:web:bc767461bc426a904e2607"
         };
 
         // Initialize Firebase
