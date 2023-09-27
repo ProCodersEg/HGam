@@ -73,23 +73,16 @@
                     <div class="mdc-line-ripple"></div>
                 </div>
             </div>
-            <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Send Message</button>
+            <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Submit Message</button>
         </div>
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 
-    <script>
-        // Function to get the user ID from the URL
-        function getUserIdFromUrl() {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('userId');
-        }
-
-        // Initialize Firebase (replace with your Firebase config)
+     <script>
         var firebaseConfig = {
-           apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
+            apiKey: "AIzaSyBEtXBiFXnk3jPmb6wdfW4SOvMXJQIjCzg",
     authDomain: "saraha-5e7fd.firebaseapp.com",
     databaseURL: "https://saraha-5e7fd-default-rtdb.firebaseio.com/",
     projectId: "saraha-5e7fd",
@@ -98,39 +91,45 @@
     appId: "1:942089850758:web:bc767461bc426a904e2607"
         };
 
-        // Get the user ID from the URL
-        var userId = getUserIdFromUrl();
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
 
-        if (userId) {
-            // Create a reference to the user's messages in the database
-            var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
+        // Function to get URL parameters
+        function getURLParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
 
-            document.getElementById('contactForm').addEventListener('submit', submitForm);
+        // Fetch the user ID from the URL
+        var userId = getURLParameter('user_id');
 
-            function submitForm(e) {
-                e.preventDefault();
+        // Create a reference to the user's messages in the database
+        var userMessagesRef = firebase.database().ref('users/' + userId + '/messages');
 
-                var name = getInputVal('name');
-                var message = getInputVal('message');
+        document.getElementById('contactForm').addEventListener('submit', submitForm);
 
-                saveMessage(name, message);
-                document.getElementById('contactForm').reset();
-            }
+        function submitForm(e) {
+            e.preventDefault();
 
-            function getInputVal(id) {
-                return document.getElementById(id).value;
-            }
+            var name = getInputVal('name');
+            var message = getInputVal('message');
 
-            function saveMessage(name, message) {
-                var newMessageRef = userMessagesRef.push();
-                newMessageRef.set({
-                    name: name,
-                    message: message,
-                });
-            }
-        } else {
-            // Handle the case when there is no user ID in the URL
-            console.error('User ID not found in the URL.');
+            saveMessage(name, message);
+            document.getElementById('contactForm').reset();
+        }
+
+        function getInputVal(id) {
+            return document.getElementById(id).value;
+        }
+
+        function saveMessage(name, message) {
+            var newMessageRef = userMessagesRef.push();
+            newMessageRef.set({
+                name: name,
+                message: message,
+            });
         }
     </script>
 </body>
